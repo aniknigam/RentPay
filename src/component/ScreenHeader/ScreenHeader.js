@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     headerContainer: {
         marginVertical: responsiveHeight(14),
         justifyContent: 'flex-start',
-        marginHorizontal: 14
+        marginHorizontal: 12
     },
     headText: {
         fontSize: responsiveFontSize(24),

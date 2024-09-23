@@ -25,6 +25,7 @@ const EnterMobileNumber = () => {
                         placeholder='Enter mobile number'
                         style={styles.textINputstyle}
                         keyboardType='numeric'
+                        placeholderTextColor={'grey'}
                     />
                 </View>
 
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 2,
+        borderWidth: 1,
         marginHorizontal: responsiveWidth(16),
         borderRadius: 12,
         marginTop:responsiveHeight(20)
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: responsiveWidth(10)
     },
     InputNumber: {
-        borderRightWidth: 2,
+        borderRightWidth: 1,
         paddingHorizontal: responsiveWidth(5)
     }
 });

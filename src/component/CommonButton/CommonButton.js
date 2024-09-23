@@ -7,7 +7,7 @@ import { Colors } from '../../common/Colors';
 // create a component
 const CommonButton = (props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={props.onPress}>
             <View style={styles.container}>
                 <Text style={styles.buttonTextStyle}>{props.buttonText}</Text>
             </View>

@@ -8,19 +8,25 @@ import { createStackNavigator } from '@react-navigation/stack';
 import EnterMobileNumber from './src/screen/EnterMobileNumber/EnterMobileNumber';
 import EnterOtpScreen from './src/screen/EnterOtpScreen/EnterOtpScreen';
 import CreateProfile from './src/screen/CreateProfile/CreateProfile';
+import KycScreen from './src/screen/KycScreen/KycScreen';
+import Dashboard from './src/screen/Dashboard/Dashboard';
+import AddProperty from './src/screen/AddProperly/AddProperty';
 
-function  App(){ 
-  const Stack  = createStackNavigator()
-  return (   
+function App() {
+  const Stack = createStackNavigator()
+  return (
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="Splash" screenOptions={{headerShown:false}}>
-      {/* <Stack.Screen name="Splash" component={Splash} /> */}
-      {/* <Stack.Screen name="EnterMobileNumber" component={EnterMobileNumber} /> */}
-      {/* <Stack.Screen name="EnterOtpScreen" component={EnterOtpScreen} /> */}
-      <Stack.Screen name="CreateProfile" component={CreateProfile} />
+      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+        {/* <Stack.Screen name="Splash" component={Splash} /> */}
+        {/* <Stack.Screen name="EnterMobileNumber" component={EnterMobileNumber} /> */}
+        {/* <Stack.Screen name="EnterOtpScreen" component={EnterOtpScreen} /> */}
+        {/* <Stack.Screen name="CreateProfile" component={CreateProfile} /> */}
+        {/* <Stack.Screen name="KycScreen" component={KycScreen} />   */}
+        {/* <Stack.Screen name="Dashboard" component={Dashboard} />   */}
+        <Stack.Screen name="AddProperty" component={AddProperty} />
 
-    </Stack.Navigator>
-  </NavigationContainer>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
