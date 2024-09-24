@@ -9,10 +9,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Colors from '../../common/Colors';
 import { indianStates } from '../../common/constant';
 import { Dropdown } from 'react-native-element-dropdown';
+import Timeline from 'react-native-timeline-flatlist';
 
 // Create a component
 const AddProperty = () => {
-    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStep, setCurrentStep] = useState(1);
     const [formData, setFormData] = useState({});
 
     const handleNext = (data) => {
@@ -173,9 +174,10 @@ const AddProperty = () => {
                     /> */}
 
                     <View style={{
-                        justifyContent:'center',
-                        alignItems:'center',
-                        flexDirection:'row'
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        marginLeft: responsiveWidth(7)
                     }}>
                         <Dropdown
                             style={[styles.dropdown, isFocus && { borderColor: 'black' }]}
@@ -228,28 +230,58 @@ const AddProperty = () => {
     const Form2 = ({ onNext, onBack }) => {
         const [field1, setField1] = useState('');
         const [field2, setField2] = useState('');
+        const [numberOfRooms, setNumberOfRooms] = useState(10)
+        // Sample data for the timeline, based on number of floors/rooms
+        const timelineData = Array.from({ length: numberOfRooms }, (v, i) => ({
+            time: `Floor ${i + 1}`,
+            title: `Room ${(i + 1) * 10}`,
+            // description: `Description for Room ${(i + 1) * 10}`
+        }));
 
         return (
-            <View>
-                <TextInput
-                    label="Field 1"
-                    mode="outlined"
-                    value={field1}
-                    onChangeText={setField1}
-                    style={[styles.input]}
-                />
-                <TextInput
-                    label="Field 2"
-                    mode="outlined"
-                    value={field2}
-                    onChangeText={setField2}
-                    style={styles.input}
-                />
-                <View style={styles.buttonContainer}>
-                    <Button title="Back" onPress={onBack} />
-                    <Button title="Next" onPress={() => {
-                        if (field1 && field2) onNext({ field1, field2 });
-                    }} />
+            <View style={{ flex: 1, }}>
+                <View style={{
+                    borderTopLeftRadius: 10,
+                    borderTopRightRadius: 10,
+                    backgroundColor: Colors.white,
+                    flex: 1,
+                    marginHorizontal: 2,
+                    elevation: 5
+                }}>
+                    <ScrollView style={{ marginHorizontal: responsiveWidth(16) }}>
+                        <View style={{}}>
+                            <Text style={{ color: 'black', fontSize: 16, fontWeight: '600' }}>{'Totoal number of rooms: '}
+                                <Text style={{ color: 'black', fontSize: 16 }}>{numberOfRooms}</Text>
+                            </Text>
+                        </View>
+
+                        <View style={{marginTop:responsiveHeight(15)}}> 
+                            <Timeline
+                                data={timelineData}
+                                circleSize={20}
+                                circleColor={Colors.brandColor}
+                                lineColor={Colors.brandColor}
+                                timeContainerStyle={{ minWidth: 52, marginTop: -5 }}
+                                timeStyle={{
+                                    textAlign: 'center',
+                                    backgroundColor: Colors.brandColor,
+                                    color: 'white',
+                                    padding: 5,
+                                    borderRadius: 13
+                                }}
+                                descriptionStyle={{ color: 'gray' }}
+                                options={{
+                                    style: { paddingTop: 5 }
+                                }}
+                            />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button title="Back" onPress={onBack} />
+                            <Button title="Next" onPress={() => {
+                                if (field1 && field2) onNext({ field1, field2 });
+                            }} />
+                        </View>
+                    </ScrollView>
                 </View>
             </View>
         );
@@ -387,7 +419,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
         flex: 1,
         marginTop: responsiveHeight(7),
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     icon: {
         marginRight: 5,
