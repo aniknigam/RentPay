@@ -3,4 +3,5 @@ export const AppImages = {
     upload: require('../assets/Images/upload.png'),
     add: require('../assets/Images/add.png'),
     backButton: require('../assets/Images/backbutton.png'),
+    bed: require('../assets/Images/bed.png'),
 }

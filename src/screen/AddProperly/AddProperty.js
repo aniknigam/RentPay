@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { Modal, TextInput } from 'react-native-paper';
 import StepIndicator from 'react-native-step-indicator';
 import HeaderBackButton from '../../component/HeaderBackButton/HeaderBackButton';
 import { responsiveHeight, responsiveWidth } from '../../common/metrices';
@@ -10,10 +10,11 @@ import Colors from '../../common/Colors';
 import { indianStates } from '../../common/constant';
 import { Dropdown } from 'react-native-element-dropdown';
 import Timeline from 'react-native-timeline-flatlist';
+import Floor from './Component/Floor';
 
 // Create a component
 const AddProperty = () => {
-    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStep, setCurrentStep] = useState(1);
     const [formData, setFormData] = useState({});
 
     const handleNext = (data) => {
@@ -228,15 +229,25 @@ const AddProperty = () => {
     };
 
     const Form2 = ({ onNext, onBack }) => {
-        const [field1, setField1] = useState('');
-        const [field2, setField2] = useState('');
-        const [numberOfRooms, setNumberOfRooms] = useState(10)
-        // Sample data for the timeline, based on number of floors/rooms
-        const timelineData = Array.from({ length: numberOfRooms }, (v, i) => ({
-            time: `Floor ${i + 1}`,
-            title: `Room ${(i + 1) * 10}`,
-            // description: `Description for Room ${(i + 1) * 10}`
-        }));
+        const [totalRooms, setTotalRooms] = useState(10)
+        const [isModalVisible, setModalVisible] = useState(false);
+        const [selectedFloor, setSelectedFloor] = useState(null);
+
+        const openModal = (floorNumber) => {
+            setSelectedFloor(floorNumber);
+            setModalVisible(true);
+        };
+
+        const closeModal = () => {
+            setModalVisible(false);
+            setSelectedFloor(null);
+        };
+
+        const addRoom = () => {
+            // Logic for adding a room (for example, incrementing totalRooms)
+            setTotalRooms(totalRooms + 1);
+            closeModal(); // Close the modal after adding the room
+        };
 
         return (
             <View style={{ flex: 1, }}>
@@ -250,37 +261,89 @@ const AddProperty = () => {
                 }}>
                     <ScrollView style={{ marginHorizontal: responsiveWidth(16) }}>
                         <View style={{}}>
-                            <Text style={{ color: 'black', fontSize: 16, fontWeight: '600' }}>{'Totoal number of rooms: '}
-                                <Text style={{ color: 'black', fontSize: 16 }}>{numberOfRooms}</Text>
+                            <Text style={{ color: 'black', fontSize: 16, fontWeight: '600' }}>{`Total rooms: ${totalRooms}`}
                             </Text>
+                            <View style={{ marginTop: responsiveHeight(10) }}>
+                                <Floor
+                                    floorNumber={'FLOOR 1'}
+                                    rooms={'ROOM 1, ROOM2, ROOM3, ROOOM 4'}
+                                />
+                                <Floor
+                                    floorNumber={'FLOOR 2'}
+                                    rooms={'ROOM 1, ROOM2, ROOM3, ROOOM 4'}
+                                />
+                                <Floor
+                                    floorNumber={'FLOOR 3'}
+                                    rooms={'ROOM 1, ROOM2, ROOM3, ROOOM 4'}
+                                />
+                                
+                                <Floor
+                                    floorNumber={'FLOOR 4'}
+                                    rooms={'ROOM 1, ROOM2, ROOM3, ROOOM 4'}
+                                />
+                                <Floor
+                                    floorNumber={'FLOOR 5'}
+                                    onAddRoomPress={() => {
+                                        openModal()
+                                    }}
+                                />
+                            </View>
                         </View>
 
-                        <View style={{marginTop:responsiveHeight(15)}}> 
-                            <Timeline
-                                data={timelineData}
-                                circleSize={20}
-                                circleColor={Colors.brandColor}
-                                lineColor={Colors.brandColor}
-                                timeContainerStyle={{ minWidth: 52, marginTop: -5 }}
-                                timeStyle={{
-                                    textAlign: 'center',
-                                    backgroundColor: Colors.brandColor,
-                                    color: 'white',
-                                    padding: 5,
-                                    borderRadius: 13
-                                }}
-                                descriptionStyle={{ color: 'gray' }}
-                                options={{
-                                    style: { paddingTop: 5 }
+                        <View style={{
+                            marginTop: responsiveHeight(15)
+                        }}>
+                            <CommonButton
+                                buttonText={'Next'}
+                                onPress={() => {
+                                    onNext({ totalRooms })
                                 }}
                             />
                         </View>
-                        <View style={styles.buttonContainer}>
-                            <Button title="Back" onPress={onBack} />
-                            <Button title="Next" onPress={() => {
-                                if (field1 && field2) onNext({ field1, field2 });
-                            }} />
+
+                        <View style={{
+                            marginTop: responsiveHeight(15)
+                        }}>
+                            <CommonButton
+                                buttonText={'Back'}
+                                backgroundColor={Colors.white}
+                                color={'black'}
+                                elevation={3}
+                                noRoom={false}
+                                onPress={onBack}
+                            />
                         </View>
+
+                        <Modal
+                            animationType="slide"
+                            transparent={false}  // Make the background behind the modal transparent
+                            visible={isModalVisible}
+                            onRequestClose={closeModal}
+                        >
+                            <View style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: 'white',
+                            }}>
+                                <View style={{
+                                    width: '90%',
+                                    backgroundColor: 'white',
+                                    borderRadius: 10,
+                                    padding: 20,  // Adds some padding inside the modal for better spacing
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    height:responsiveHeight(500)
+                                }}>
+                                    <TouchableOpacity onPress={addRoom}>
+                                        <Text style={{ color: 'blue', fontSize: 16, marginBottom: 20 }}>Add Room</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={closeModal} style={{ marginTop: 10 }}>
+                                        <Text style={{ color: 'red', fontSize: 16 }}>Cancel</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </Modal>
                     </ScrollView>
                 </View>
             </View>

@@ -19,14 +19,13 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Contact
       " screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Splash" component={Splash} />
+        {/* <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="EnterMobileNumber" component={EnterMobileNumber} />
         <Stack.Screen name="EnterOtpScreen" component={EnterOtpScreen} />
-        <Stack.Screen name="CreateProfile" component={CreateProfile} />
+        <Stack.Screen name="CreateProfile" component={CreateProfile} /> */}
         {/* <Stack.Screen name="KycScreen" component={KycScreen} />   */}
         {/* <Stack.Screen name="Dashboard" component={Dashboard} />   */}
-        {/* <Stack.Screen name="AddProperty" component={AddProperty} />
-        {/* <Stack.Screen name="Contact" component={Contact} /> */}
+        <Stack.Screen name="AddProperty" component={AddProperty} />
 
 
       </Stack.Navigator>
