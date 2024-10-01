@@ -13,7 +13,7 @@ import Timeline from 'react-native-timeline-flatlist';
 
 // Create a component
 const AddProperty = () => {
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState({});
 
     const handleNext = (data) => {

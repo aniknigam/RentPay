@@ -11,19 +11,23 @@ import CreateProfile from './src/screen/CreateProfile/CreateProfile';
 import KycScreen from './src/screen/KycScreen/KycScreen';
 import Dashboard from './src/screen/Dashboard/Dashboard';
 import AddProperty from './src/screen/AddProperly/AddProperty';
+import Contact from './src/screen/Contact/Contact';
 
 function App() {
   const Stack = createStackNavigator()
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Splash" component={Splash} /> */}
-        {/* <Stack.Screen name="EnterMobileNumber" component={EnterMobileNumber} /> */}
-        {/* <Stack.Screen name="EnterOtpScreen" component={EnterOtpScreen} /> */}
-        {/* <Stack.Screen name="CreateProfile" component={CreateProfile} /> */}
+      <Stack.Navigator initialRouteName="Contact
+      " screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="EnterMobileNumber" component={EnterMobileNumber} />
+        <Stack.Screen name="EnterOtpScreen" component={EnterOtpScreen} />
+        <Stack.Screen name="CreateProfile" component={CreateProfile} />
         {/* <Stack.Screen name="KycScreen" component={KycScreen} />   */}
         {/* <Stack.Screen name="Dashboard" component={Dashboard} />   */}
-        <Stack.Screen name="AddProperty" component={AddProperty} />
+        {/* <Stack.Screen name="AddProperty" component={AddProperty} />
+        {/* <Stack.Screen name="Contact" component={Contact} /> */}
+
 
       </Stack.Navigator>
     </NavigationContainer>
